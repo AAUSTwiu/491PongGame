@@ -30,5 +30,3 @@ public class PongStartPanel extends JPanel{
 		g.drawImage(image,0,0,this);
 
 	}
-
-}

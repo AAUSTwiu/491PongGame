@@ -96,4 +96,3 @@ class Ball extends Rectangle{
 		
 	}
 }
-
