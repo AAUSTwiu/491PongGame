@@ -1,4 +1,4 @@
-package pongPackage;
+package pong;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -58,11 +58,46 @@ public class Paddle extends Rectangle {
 	    }
 	}
 	public void createPaddle(Graphics g){
-		if(paddleID==1)
-			g.setColor(Color.orange);
-	    else
+		Color color2 = new Color(235,175,96);
+		Color color3 = new Color(233,235,73);
+		Color color1= new Color(92,7,219);
+		if(paddleID==1) {
+			g.setColor(Color.green);
+			g.fillRect(x,y,width,height);
+		}
+		if(paddleID==2) {
+			g.setColor(color1);
+			g.fillRect(x,y,width,height);
+		}
+		if(paddleID==3) {
+			g.setColor(Color.red);
+			g.fillRect(x,y,width,height);
+		}
+		if(paddleID==4) {
+			g.setColor(color2);
+			g.fillRect(x,y,width,height);
+		}
+		if(paddleID==5) {
+			g.setColor(Color.pink);
+			g.fillRect(x,y,width,height);
+		}
+		if(paddleID==6) {
+			g.setColor(Color.blue);
+			g.fillRect(x,y,width,height);
+		}
+		if(paddleID==7) {
+			g.setColor(Color.black);
+			g.drawRect(0, 0, 998, 498);
+		}
+		if(paddleID==10) {
+			g.setColor(Color.black);
+			g.drawRect(x, y, width, height);
+		}
+	    if(paddleID==0) {
 	      g.setColor(Color.green);
-		g.fillRect(x,y,width,height);
+	      g.fillRect(x,y,width,height);
+		
+	    }
 	}
 	public void setDirection(int direction) {
 		veloc = direction;
@@ -71,4 +106,3 @@ public class Paddle extends Rectangle {
 		y = y + veloc;
 	}
 }
-

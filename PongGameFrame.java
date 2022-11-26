@@ -1,11 +1,11 @@
-package pongPackage;
+package pong;
 
 import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-class PongGameFrame extends JFrame{
+public class PongGameFrame extends JFrame{
 	JLabel end;
 	PongGamePanel panel;
 	PongGameFrame(){
@@ -21,4 +21,3 @@ class PongGameFrame extends JFrame{
 
 	
 	}
-}

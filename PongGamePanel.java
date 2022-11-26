@@ -1,4 +1,4 @@
-package pongPackage;
+package pong;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -8,8 +8,6 @@ import java.awt.event.KeyEvent;
 import java.util.Random;
 
 import javax.swing.JPanel;
-
-import pongPackage.PongGamePanel.ActionL;
 
 public class PongGamePanel extends JPanel implements Runnable{
 	//I'm currently not the biggest fan of the size of the field, but I think it is ok atm, definitely something to change tho
@@ -50,7 +48,9 @@ public class PongGamePanel extends JPanel implements Runnable{
 	PongGamePanel(){
 		newPaddles();
 		newBall();
-		newPowerUP();
+		newRedPowerUP();
+		newPinkPowerUP();
+		newMagentaPowerUP();
 		secondBall();
 		score = new Score(FIELD_WIDTH,FIELD_HEIGHT,0);
 		this.setFocusable(true);
@@ -59,17 +59,24 @@ public class PongGamePanel extends JPanel implements Runnable{
 		gameT = new Thread(this);
 		gameT.start();
 	}
-	public void newPowerUP() {
+	public void newRedPowerUP() {
 
 		rand = new Random();
 		//decreases other players paddle size
 		redPowerUp = new PowerUp(rand.nextInt(FIELD_WIDTH-POWER_UP_WIDTH),rand.nextInt(FIELD_HEIGHT-POWER_UP_HEIGHT),POWER_UP_WIDTH,POWER_UP_HEIGHT,1);
-		//increases your paddle size
-		pinkPowerUp = new PowerUp(rand.nextInt(FIELD_WIDTH-POWER_UP_WIDTH),rand.nextInt(FIELD_HEIGHT-POWER_UP_HEIGHT),POWER_UP_WIDTH,POWER_UP_HEIGHT,2);
-		//spawns another ball
-		magentaPowerUp = new PowerUp(rand.nextInt(FIELD_WIDTH-POWER_UP_WIDTH),rand.nextInt(FIELD_HEIGHT-POWER_UP_HEIGHT),POWER_UP_WIDTH,POWER_UP_HEIGHT,3);
+		
 }
 
+	public void newPinkPowerUP() {
+		pinkPowerUp = new PowerUp(0,0,0,0,2);
+	}
+	
+	public void newMagentaPowerUP() {
+		magentaPowerUp = new PowerUp(0,0,0,0,0);
+	}
+	
+	//pinkPowerUp = new PowerUp(rand.nextInt(FIELD_WIDTH-POWER_UP_WIDTH),rand.nextInt(FIELD_HEIGHT-POWER_UP_HEIGHT),POWER_UP_WIDTH,POWER_UP_HEIGHT,2);
+	//magentaPowerUp = new PowerUp(rand.nextInt(FIELD_WIDTH-POWER_UP_WIDTH),rand.nextInt(FIELD_HEIGHT-POWER_UP_HEIGHT),POWER_UP_WIDTH,POWER_UP_HEIGHT,3);
 	public void newBall() {
 		rand = new Random();
 		ball = new Ball((FIELD_WIDTH/2)-(BALL_SIZE/2),rand.nextInt(FIELD_HEIGHT-BALL_SIZE),BALL_SIZE,BALL_SIZE,0);
@@ -141,14 +148,16 @@ public class PongGamePanel extends JPanel implements Runnable{
 		if(ball.ballId==1) {
 			if(ball.intersects(redPowerUp)){
 				paddle2.height = paddle2.height -6;
-				newPowerUP();
+				redPowerUp = new PowerUp(0,0,0,0,0);
+				pinkPowerUp = new PowerUp(rand.nextInt(FIELD_WIDTH-POWER_UP_WIDTH),rand.nextInt(FIELD_HEIGHT-POWER_UP_HEIGHT),POWER_UP_WIDTH,POWER_UP_HEIGHT,2);
 			}
 		}
 		//Checks to see if right paddle hit redPowerUp (Red Power up shrinks other players paddle)
 		if(ball.ballId==2) {
 			if(ball.intersects(redPowerUp)){
 				paddle1.height = paddle1.height -6;
-				newPowerUP();
+				redPowerUp = new PowerUp(0,0,0,0,0);
+				magentaPowerUp = new PowerUp(rand.nextInt(FIELD_WIDTH-POWER_UP_WIDTH),rand.nextInt(FIELD_HEIGHT-POWER_UP_HEIGHT),POWER_UP_WIDTH,POWER_UP_HEIGHT,3);
 			}
 		}
 	
@@ -156,24 +165,32 @@ public class PongGamePanel extends JPanel implements Runnable{
 		if(ball.ballId==1) {
 			if(ball.intersects(pinkPowerUp)){
 				paddle1.height = paddle1.height +6 ;
-				newPowerUP();
+				pinkPowerUp = new PowerUp(0,0,0,0,0);
+				redPowerUp = new PowerUp(rand.nextInt(FIELD_WIDTH-POWER_UP_WIDTH),rand.nextInt(FIELD_HEIGHT-POWER_UP_HEIGHT),POWER_UP_WIDTH,POWER_UP_HEIGHT,1);
 			}
 		}
 		//Checks to see if right paddle hit pinkPowerUp (Pink Power up increases YOUR paddle)
 		if(ball.ballId==2) {
 			if(ball.intersects(pinkPowerUp)){
-				paddle2.height = paddle2.height +6;
-				newPowerUP();
+				pinkPowerUp = new PowerUp(0,0,0,0,0);
+				magentaPowerUp = new PowerUp(rand.nextInt(FIELD_WIDTH-POWER_UP_WIDTH),rand.nextInt(FIELD_HEIGHT-POWER_UP_HEIGHT),POWER_UP_WIDTH,POWER_UP_HEIGHT,3);
 			}
 		}
-		//Spawns second ball if ball 1 hits magenta power up
-		if(ball.ballId==1||ball.ballId==2) {
-		if(ball.intersects(magentaPowerUp)) {
-			secondBall = new Ball((FIELD_WIDTH/2)-(BALL_SIZE/2),rand.nextInt(FIELD_HEIGHT-BALL_SIZE),BALL_SIZE,BALL_SIZE,1);
-			secondBall.ballId=3;
-			newPowerUP();
+		//Checks to see if left paddle hit pinkPowerUp (Pink Power up increases YOUR paddle)
+		if(ball.ballId==1) {
+			if(ball.intersects(magentaPowerUp)){
+				paddle1.height = paddle1.height +6 ;
+				magentaPowerUp = new PowerUp(0,0,0,0,0);
+				redPowerUp = new PowerUp(rand.nextInt(FIELD_WIDTH-POWER_UP_WIDTH),rand.nextInt(FIELD_HEIGHT-POWER_UP_HEIGHT),POWER_UP_WIDTH,POWER_UP_HEIGHT,1);
+			}
 		}
-	}
+				//Checks to see if right paddle hit pinkPowerUp (Pink Power up increases YOUR paddle)
+		if(ball.ballId==2) {
+			if(ball.intersects(magentaPowerUp)){
+				magentaPowerUp = new PowerUp(0,0,0,0,0);
+				pinkPowerUp = new PowerUp(rand.nextInt(FIELD_WIDTH-POWER_UP_WIDTH),rand.nextInt(FIELD_HEIGHT-POWER_UP_HEIGHT),POWER_UP_WIDTH,POWER_UP_HEIGHT,2);
+			}
+		}
 		//roof collision
 		if (ball.y <= 0) {
 			ball.setYDirection(-ball.yVeloc);
@@ -229,7 +246,7 @@ public class PongGamePanel extends JPanel implements Runnable{
 			score.player2++;
 			newPaddles();
 			newBall();
-			newPowerUP();
+			newRedPowerUP();
 		}
 		if(secondBall.ballId==3&&secondBall.x<=0) {
 			score.player2++;
@@ -240,7 +257,7 @@ public class PongGamePanel extends JPanel implements Runnable{
 			score.player1++;
 			newPaddles();
 			newBall();
-			newPowerUP();
+			newRedPowerUP();
 		}
 		if(secondBall.ballId==3&&secondBall.x>=FIELD_WIDTH-BALL_SIZE) {
 			score.player1++;

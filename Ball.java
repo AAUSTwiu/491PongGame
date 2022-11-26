@@ -1,11 +1,12 @@
-package pongPackage;
+package pong;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Random;
 
-public class Ball extends Rectangle{
+class Ball extends Rectangle{
 	Random rand;
 	int baseSpeed = 2;
 	int xVeloc;
@@ -15,6 +16,7 @@ public class Ball extends Rectangle{
 	Ball(int x, int y, int ballWidth, int ballHeight,int id){
 		//uses rectangle to make the shape
 		super(x,y,ballWidth,ballHeight);
+		this.ballId = id;
 		rand = new Random();
 		int randXDirection = rand.nextInt(2);
 		if(randXDirection == 0) {
@@ -29,19 +31,45 @@ public class Ball extends Rectangle{
 		setYDirection(randYDirection*baseSpeed);
 	}
 	public void createBall(Graphics g){
-		if(ballId==0) {        //initial spawn ball
-	    g.setColor(Color.cyan);
+		Color color1= new Color(92,7,219);
+		Color color2 = new Color(222,134,126);
+		if(ballId==0) {
+			g.setColor(color2);
+			g.fillOval(x,y,width,height);
 		}
-	    if(ballId==1) {        //ball that has been hit by player 1
-	    	g.setColor(Color.orange);
-	    }
-	    if(ballId==2) {        //ball that has been hit by player 2
-	    	g.setColor(Color.green);
-	    }
-	    if(ballId==3) {			//second spawn ball
-	    	g.setColor(Color.black);
-	    }
-	    g.fillOval(x,y,width,height);
+		if(ballId==1) {
+			g.setColor(Color.green);
+			g.fillOval(x,y,width,height);
+		}
+		if(ballId==2) {
+			g.setColor(color1);
+			g.fillOval(x,y,width,height);
+		}
+		if(ballId==3) {
+			g.setColor(Color.red);
+			g.fillOval(x,y,width,height);
+		}
+		if(ballId==4) {
+			g.setColor(Color.orange);
+			g.fillOval(x,y,width,height);
+		}
+		if(ballId==5) {
+			g.setColor(Color.pink);
+			g.fillOval(x,y,width,height);
+		}
+		if(ballId==6) {
+			g.setColor(Color.CYAN);
+			g.fillOval(x,y,width,height);
+		}
+		if(ballId==7) {
+			g.setColor(Color.red);
+			g.drawRect(0, 0, 998, 498);
+		}
+		if(ballId==10) {
+			g.setColor(Color.black);
+			g.drawRect(x, y, width, height);
+		}
+	  
 	}
 	public void setXDirection(int xDir) {
 		xVeloc = xDir;
