@@ -1,4 +1,4 @@
-package pong;
+package pongPackage;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 public class PongStoreFrame extends JFrame implements ActionListener{
 	JLabel welcome, credits, points;
 	JButton play, settings,store;
-PongStorePanel panel1;
+	PongStorePanel panel1;
 	PongStoreFrame(){
 	  	panel1 = new PongStorePanel();
 	  	this.add(panel1);
@@ -43,6 +43,7 @@ PongStorePanel panel1;
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("<-- back")) {
 			PongStartFrame frame = new PongStartFrame();
+			this.dispose();
 
 			
 		

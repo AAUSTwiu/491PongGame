@@ -71,16 +71,20 @@ public class PongStartFrame extends JFrame implements ActionListener{
 	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Single-Player")) {
-			
+			SinglePlayerStartFrame spFrame = new SinglePlayerStartFrame();
+			this.dispose();
 		}
 		if(e.getActionCommand().equals("Face-Off")) {
 			PongGameFrame foFrame = new PongGameFrame();
+			this.dispose();
 		}
 		if(e.getActionCommand().equals("Settings")) {
 			PongSettingsFrame sFrame = new PongSettingsFrame();
+			this.dispose();
 		}
 		if(e.getActionCommand().equals("Shop")) {
 			PongStoreFrame stFrame = new PongStoreFrame();
+			this.dispose();
 		}
 	
 	}
