@@ -1,4 +1,4 @@
-package pong;
+package pongPackage;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -43,6 +43,7 @@ public class PongSettingsFrame extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("<-- back")) {
 			PongStartFrame frame = new PongStartFrame();
+			this.dispose();
 
 			
 		

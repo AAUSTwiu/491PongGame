@@ -7,7 +7,7 @@ import java.awt.Image;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class SinglePlayerStartPanel extends JPanel{
+public class HowToPlayPanel extends JPanel{
 	static final int FIELD_WIDTH = 1000;
 	static final int FIELD_HEIGHT = 500;
 	static final Dimension GAME_SIZE = new Dimension(FIELD_WIDTH,FIELD_HEIGHT);
@@ -15,7 +15,7 @@ public class SinglePlayerStartPanel extends JPanel{
 	Graphics graphics;
 	JLabel welcome;
 	SinglePlayerStartPanel psp;
-	SinglePlayerStartPanel(){
+	HowToPlayPanel(){
 		this.setFocusable(true);
 		this.setPreferredSize(GAME_SIZE);
 		this.setLayout(null);
@@ -32,5 +32,4 @@ public class SinglePlayerStartPanel extends JPanel{
 
 	}
 
-	
 }

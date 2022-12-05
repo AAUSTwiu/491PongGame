@@ -7,8 +7,8 @@ import javax.swing.*;
 
 public class FaceOffStartFrame extends JFrame implements ActionListener{
 	JLabel singlePlayerL, playerIDL, gameModeL, play1L, play2L;
-	JButton back, start;
-	JTextField player1, player2, timeScore;
+	JButton back, start, quickPlay;
+	JTextField player1, player2, winScore;
 	JComboBox<String> gameMode;
 	SinglePlayerStartPanel foMenu;
 	FaceOffStartFrame(){
@@ -16,7 +16,7 @@ public class FaceOffStartFrame extends JFrame implements ActionListener{
 		this.add(foMenu);
 		
 		this.setResizable(false);
-	  	this.setBackground(Color.gray);
+	  	this.setBackground(new Color(36, 37, 130));
 	  	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	  	this.pack();
 	  	this.setLocationRelativeTo(null);
@@ -25,29 +25,34 @@ public class FaceOffStartFrame extends JFrame implements ActionListener{
 	  	singlePlayerL = new JLabel("Face Off");
 	  	foMenu.add(singlePlayerL);
 	  	singlePlayerL.setFont(new Font("Times New Roman", Font.BOLD, 57));
+	  	singlePlayerL.setForeground(new Color(255, 255, 255));
 	    singlePlayerL.setBounds(350,25,500,75);
 	    singlePlayerL.setVisible(true);
 	    
 	    playerIDL = new JLabel("Player IDs:");
 	  	foMenu.add(playerIDL);
+	  	playerIDL.setForeground(new Color(255, 255, 255));
 	  	playerIDL.setFont(new Font("Times New Roman", Font.BOLD, 57));
 	    playerIDL.setBounds(100,150,500,75);
 	    playerIDL.setVisible(true);
 	    
 	    play1L = new JLabel("Player 1:");
 	    foMenu.add(play1L);
+	    play1L.setForeground(new Color(255, 255, 255));
 	  	play1L.setFont(new Font("Times New Roman", Font.BOLD, 30));
 	    play1L.setBounds(400,100,200,50);
 	    play1L.setVisible(true);
 	    
 	    play2L = new JLabel("Player 2:");
 	    foMenu.add(play2L);
+	    play2L.setForeground(new Color(255, 255, 255));
 	  	play2L.setFont(new Font("Times New Roman", Font.BOLD, 30));
 	    play2L.setBounds(700,100,200,50);
 	    play2L.setVisible(true);
 	    
 	    gameModeL = new JLabel("Game Mode:");
 	  	foMenu.add(gameModeL);
+	  	gameModeL.setForeground(new Color(255, 255, 255));
 	  	gameModeL.setFont(new Font("Times New Roman", Font.BOLD, 57));
 	    gameModeL.setBounds(100,300,500,75);
 	    gameModeL.setVisible(true);
@@ -62,10 +67,10 @@ public class FaceOffStartFrame extends JFrame implements ActionListener{
 	    player2.setBounds(700,160,200,50);
 	    player2.setFont(new Font("Times New Roman", Font.BOLD, 30));
 	    
-	    timeScore = new JTextField();
-	    foMenu.add(timeScore);
-	    timeScore.setBounds(800,310,100,50);
-	    timeScore.setFont(new Font("Times New Roman", Font.BOLD, 30));
+	    winScore = new JTextField();
+	    foMenu.add(winScore);
+	    winScore.setBounds(800,310,100,50);
+	    winScore.setFont(new Font("Times New Roman", Font.BOLD, 30));
 	    
 	    String[] gm = {"Score (default 5)", "Timed in Minutes (default 2)"};
 	    gameMode = new JComboBox<>();
@@ -86,6 +91,12 @@ public class FaceOffStartFrame extends JFrame implements ActionListener{
 	    start.addActionListener(this);
 	    start.setBounds(850,450,100,30);
 	    start.setVisible(true);
+	    
+	    quickPlay = new JButton ("Quick Play");
+	    foMenu.add(quickPlay);
+	    quickPlay.addActionListener(this);
+	    quickPlay.setBounds(100,450,100,30);
+	    quickPlay.setVisible(true);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -93,7 +104,23 @@ public class FaceOffStartFrame extends JFrame implements ActionListener{
 		//will also add the new user, if they are new, to the userList
 		
 		if(e.getActionCommand().equals("<-- back")) {
-			PongStartFrame frame = new PongStartFrame();
+			StartFrame frame = new StartFrame();
+			frame.setVisible(true);
+			this.dispose();
+		}
+		
+		if(e.getActionCommand().equals("Start")) {
+			UserList users = new UserList();
+			String p1 = player1.getText();
+			String p2 = player2.getText();
+			users.addNewUser(p1);
+			users.addNewUser(p2);
+			PongGameFrame game = new PongGameFrame(0,users,p1,p2,Integer.parseInt(winScore.getText()));
+			this.dispose();
+		}
+		
+		if(e.getActionCommand().equals("Quick Play")) {
+			PongGameFrame qp = new PongGameFrame(0);
 			this.dispose();
 		}
 	}

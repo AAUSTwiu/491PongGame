@@ -34,7 +34,8 @@ public class Pong {
 	}
 	public static void main(String[] args){
 
-		PongStartFrame sFrame = new PongStartFrame();
+		StartFrame sFrame = new StartFrame();
+		sFrame.setVisible(true);
 	}
 	
 }

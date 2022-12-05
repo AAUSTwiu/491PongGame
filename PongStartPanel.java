@@ -1,4 +1,4 @@
-package pong;
+package pongPackage;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -30,3 +30,5 @@ public class PongStartPanel extends JPanel{
 		g.drawImage(image,0,0,this);
 
 	}
+
+}

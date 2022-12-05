@@ -1,4 +1,4 @@
-package pong;
+package pongPackage;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,4 +1,4 @@
-package pong;
+package pongPackage;
 
 import java.awt.Dimension;
 import java.awt.Graphics;

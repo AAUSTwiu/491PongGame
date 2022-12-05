@@ -75,7 +75,7 @@ public class PongStartFrame extends JFrame implements ActionListener{
 			this.dispose();
 		}
 		if(e.getActionCommand().equals("Face-Off")) {
-			PongGameFrame foFrame = new PongGameFrame();
+			FaceOffStartFrame foFrame = new FaceOffStartFrame();
 			this.dispose();
 		}
 		if(e.getActionCommand().equals("Settings")) {
@@ -84,6 +84,10 @@ public class PongStartFrame extends JFrame implements ActionListener{
 		}
 		if(e.getActionCommand().equals("Shop")) {
 			PongStoreFrame stFrame = new PongStoreFrame();
+			this.dispose();
+		}
+		if(e.getActionCommand().equals("How To Play")) {
+			HowToPlayFrame htpf = new HowToPlayFrame();
 			this.dispose();
 		}
 	

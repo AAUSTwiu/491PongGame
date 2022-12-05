@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 
 public class PongStoreFrame extends JFrame implements ActionListener{
 	JLabel welcome, credits, points;
-	JButton play, settings,store;
+	JButton play, back,store;
 	PongStorePanel panel1;
 	PongStoreFrame(){
 	  	panel1 = new PongStorePanel();
@@ -30,11 +30,11 @@ public class PongStoreFrame extends JFrame implements ActionListener{
 		   
 		    
 		    
-		    settings = new JButton("<-- back");
-		    panel1.add(settings);
-		    settings.addActionListener(this);
-		    settings.setBounds(30,200,100,30);
-		    settings.setVisible(true);
+	  		back = new JButton ("<-- back");
+	  		panel1.add(back);
+	  		back.addActionListener(this);
+	  		back.setBounds(30,200,100,30);
+	  		back.setVisible(true);
 		    
 		    
 	    
@@ -42,7 +42,8 @@ public class PongStoreFrame extends JFrame implements ActionListener{
 	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("<-- back")) {
-			PongStartFrame frame = new PongStartFrame();
+			StartFrame frame = new StartFrame();
+			frame.setVisible(true);
 			this.dispose();
 
 			

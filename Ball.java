@@ -1,4 +1,4 @@
-package pong;
+package pongPackage;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -76,6 +76,12 @@ class Ball extends Rectangle{
 	}
 	public void setYDirection(int yDir) {
 		yVeloc = yDir;
+	}
+	public int getXVeloc() {
+		return xVeloc;
+	}
+	public int getYVeloc() {
+		return yVeloc;
 	}
 	public void move() {
 		x += xVeloc;

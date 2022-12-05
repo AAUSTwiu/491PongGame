@@ -9,15 +9,16 @@ import javax.swing.*;
 public class SinglePlayerStartFrame extends JFrame implements ActionListener {
 	JLabel singlePlayerL, playerIDL, gameModeL;
 	JButton back, start;
-	JTextField player, timeScore;
+	JTextField player, winScore;
 	JComboBox<String> gameMode;
 	SinglePlayerStartPanel spMenu;
+	UserList users = new UserList();
 	SinglePlayerStartFrame(){
 		spMenu = new SinglePlayerStartPanel();
 		this.add(spMenu);
 		
 		this.setResizable(false);
-	  	this.setBackground(Color.gray);
+	  	this.setBackground(new Color(36, 37, 130));
 	  	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	  	this.pack();
 	  	this.setLocationRelativeTo(null);
@@ -25,18 +26,21 @@ public class SinglePlayerStartFrame extends JFrame implements ActionListener {
 	  	
 	  	singlePlayerL = new JLabel("SinglePlayer");
 	  	spMenu.add(singlePlayerL);
+	  	singlePlayerL.setForeground(new Color(255, 255, 255));
 	  	singlePlayerL.setFont(new Font("Times New Roman", Font.BOLD, 57));
 	    singlePlayerL.setBounds(350,25,500,75);
 	    singlePlayerL.setVisible(true);
 	    
 	    playerIDL = new JLabel("Player ID:");
 	  	spMenu.add(playerIDL);
+	  	playerIDL.setForeground(new Color(255, 255, 255));
 	  	playerIDL.setFont(new Font("Times New Roman", Font.BOLD, 57));
 	    playerIDL.setBounds(100,150,500,75);
 	    playerIDL.setVisible(true);
 	    
 	    gameModeL = new JLabel("Game Mode:");
 	  	spMenu.add(gameModeL);
+	  	gameModeL.setForeground(new Color(255, 255, 255));
 	  	gameModeL.setFont(new Font("Times New Roman", Font.BOLD, 57));
 	    gameModeL.setBounds(100,300,500,75);
 	    gameModeL.setVisible(true);
@@ -46,10 +50,10 @@ public class SinglePlayerStartFrame extends JFrame implements ActionListener {
 	    player.setBounds(500,160,200,50);
 	    player.setFont(new Font("Times New Roman", Font.BOLD, 30));
 	    
-	    timeScore = new JTextField();
-	    spMenu.add(timeScore);
-	    timeScore.setBounds(800,310,100,50);
-	    timeScore.setFont(new Font("Times New Roman", Font.BOLD, 30));
+	    winScore = new JTextField();
+	    spMenu.add(winScore);
+	    winScore.setBounds(800,310,100,50);
+	    winScore.setFont(new Font("Times New Roman", Font.BOLD, 30));
 	    
 	    String[] gm = {"Score (default 5)", "Timed in Minutes (default 2)"};
 	    gameMode = new JComboBox<>();
@@ -77,8 +81,16 @@ public class SinglePlayerStartFrame extends JFrame implements ActionListener {
 		//will also add the new user, if they are new, to the userList
 		
 		if(e.getActionCommand().equals("<-- back")) {
-			PongStartFrame frame = new PongStartFrame();
+			StartFrame frame = new StartFrame();
+			frame.setVisible(true);
 			this.dispose();
+		}
+		if(e.getActionCommand().equals("Start")) {
+			UserList users = new UserList();
+			String p1 = player.getText();
+			String p2 = "CPU";
+			users.addNewUser(p1);
+			PongGameFrame game = new PongGameFrame(1,users,p1,p2,Integer.parseInt(winScore.getText()));
 		}
 	}
 }
